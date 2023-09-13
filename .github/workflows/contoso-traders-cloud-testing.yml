@@ -653,7 +653,7 @@ jobs:
         run: npm ci
       - name: run playwright tests
         id: test
-        run: HOME=/root npx playwright test
+        run: HOME=/root npx playwright test --config=playwright.service.config.ts 
       - name: upload playwright report
         uses: actions/upload-artifact@v3
         # only upload report if tests failed
