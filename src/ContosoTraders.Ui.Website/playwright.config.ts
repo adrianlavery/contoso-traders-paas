@@ -29,7 +29,8 @@ export default defineConfig({
     ["junit", { outputFile: "playwright-report-junit/e2e-junit-results.xml" }],
     ...(process.env.CI ? [['github'] as ['github']] : []),
   ],
-
+  // Ignore screenshots locally and only run using MPT service via playwright.service.config.ts
+  ignoreSnapshots: true,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* https://github.com/microsoft/playwright/issues/14440 - TODO - Investigate later */
