@@ -20,7 +20,7 @@ export default defineConfig(config, {
   workers: 40,
   // Enable screenshot testing and configure directory with expectations.
   ignoreSnapshots: false,
-  snapshotPathTemplate: `{testDir}/__screenshots__/{testFilePath}/${os}/{arg}{ext}`,  
+  snapshotPathTemplate: `{testDir}/{testFilePath}-snapshots/${os}/{arg}{ext}`,  
   use: {
     // Specify the service endpoint.
     connectOptions: {
