@@ -739,16 +739,12 @@ stages:
           - script: echo "##vso[task.setvariable variable=REACT_APP_AADPASSWORD]$(AADPASSWORD)"
             displayName: set REACT_APP_AADPASSWORD
             condition: and(ne(variables['AADUSERNAME'], ''), ne(variables['AADPASSWORD'], ''))
-          - script: |
-              echo "##vso[task.setvariable variable=PLAYWRIGHT_SERVICE_ACCESS_KEY]$(PLAYWRIGHT_SERVICE_ACCESS_KEY)"
-              echo "##vso[task.setvariable variable=PLAYWRIGHT_SERVICE_URL]$(PLAYWRIGHT_SERVICE_URL)"
-            displayName: set Microsoft Playwright Testing variables
           - script: npm ci
             displayName: install dependencies
             workingDirectory: src/ContosoTraders.Ui.Website
           - script: |
               echo "##vso[task.setvariable variable=CI;]1"
-              npx playwright test --config=playwright.service.config.ts 
+              PLAYWRIGHT_SERVICE_URL=$(PLAYWRIGHT_SERVICE_URL) PLAYWRIGHT_SERVICE_ACCESS_KEY=$(PLAYWRIGHT_SERVICE_ACCESS_KEY) npx playwright test --config=playwright.service.config.ts 
             displayName: run playwright tests
             workingDirectory: src/ContosoTraders.Ui.Website
             timeoutInMinutes: 20
