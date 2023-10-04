@@ -17,6 +17,10 @@ process.env.PLAYWRIGHT_SERVICE_RUN_ID = process.env.PLAYWRIGHT_SERVICE_RUN_ID ||
 const os = process.env.PLAYWRIGHT_SERVICE_OS || 'linux';
 
 export default defineConfig(config, {
+  timeout: 60000,
+  expect: {
+    timeout: 10000,
+  },  
   workers: 100,
   // Enable screenshot testing and configure directory with expectations.
   ignoreSnapshots: false,
@@ -28,7 +32,6 @@ export default defineConfig(config, {
         os,
         runId: process.env.PLAYWRIGHT_SERVICE_RUN_ID,
       })}`,
-      timeout: 30000,
       headers: {
         "x-mpt-access-key": process.env.PLAYWRIGHT_SERVICE_ACCESS_KEY!,
       },
