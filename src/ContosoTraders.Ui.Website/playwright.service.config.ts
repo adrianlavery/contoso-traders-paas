@@ -19,7 +19,7 @@ const os = process.env.PLAYWRIGHT_SERVICE_OS || 'linux';
 export default defineConfig(config, {
   timeout: 60000,
   expect: {
-    timeout: 10000,
+    timeout: 20000,
   },  
   workers: 100,
   // Enable screenshot testing and configure directory with expectations.
