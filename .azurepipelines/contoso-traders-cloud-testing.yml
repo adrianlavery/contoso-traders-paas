@@ -719,6 +719,8 @@ stages:
           APIURL: $[ dependencies.provision.outputs['getProductsApiEndpoint.productsApiEndpoint'] ]
           BASEURLFORPLAYWRIGHTTESTING: $[ dependencies.provision.outputs['getUiCdnEndpoint.uiCdnEndpoint'] ]
           B2CCLIENTID: $[ dependencies.provision.outputs['getAzureAdAppClientId.azureAdAppClientId'] ]
+          PLAYWRIGHT_SERVICE_URL: $(PLAYWRIGHT_SERVICE_URL)
+          PLAYWRIGHT_SERVICE_ACCESS_KEY: $(PLAYWRIGHT_SERVICE_ACCESS_KEY)
         steps:
           - task: NodeTool@0
             displayName: install nodejs
@@ -742,7 +744,7 @@ stages:
           - script: |
               echo "##vso[task.setvariable variable=PLAYWRIGHT_SERVICE_ACCESS_KEY]$(PLAYWRIGHT_SERVICE_ACCESS_KEY)"
               echo "##vso[task.setvariable variable=PLAYWRIGHT_SERVICE_URL]$(PLAYWRIGHT_SERVICE_URL)"
-            displayName: set MPT variables
+            displayName: set Microsoft Playwright Testing variables
           - script: npm ci
             displayName: install dependencies
             workingDirectory: src/ContosoTraders.Ui.Website

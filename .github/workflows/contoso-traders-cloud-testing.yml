@@ -640,7 +640,7 @@ jobs:
           node-version: 18
           cache: npm
           cache-dependency-path: src/ContosoTraders.Ui.Website/package-lock.json
-      - name: Set env variables for testing endpoints and MTP
+      - name: Set env variables for testing endpoints and Microsoft Playwright Testing
         run: |
           echo "REACT_APP_APIURLSHOPPINGCART"="https://${{ needs.provision.outputs.cartsApiEndpoint }}/v1" >> $GITHUB_ENV
           echo "REACT_APP_APIURL"="https://${{ needs.provision.outputs.productsApiEndpoint }}/v1" >> $GITHUB_ENV
