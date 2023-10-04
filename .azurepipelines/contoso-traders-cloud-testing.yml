@@ -739,6 +739,10 @@ stages:
           - script: echo "##vso[task.setvariable variable=REACT_APP_AADPASSWORD]$(AADPASSWORD)"
             displayName: set REACT_APP_AADPASSWORD
             condition: and(ne(variables['AADUSERNAME'], ''), ne(variables['AADPASSWORD'], ''))
+          - script: |
+              echo "##vso[task.setvariable variable=PLAYWRIGHT_SERVICE_ACCESS_KEY]$(PLAYWRIGHT_SERVICE_ACCESS_KEY)"
+              echo "##vso[task.setvariable variable=PLAYWRIGHT_SERVICE_URL]$(PLAYWRIGHT_SERVICE_URL)"
+            displayName: set MPT variables
           - script: npm ci
             displayName: install dependencies
             workingDirectory: src/ContosoTraders.Ui.Website

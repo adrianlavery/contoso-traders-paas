@@ -17,7 +17,7 @@ process.env.PLAYWRIGHT_SERVICE_RUN_ID = process.env.PLAYWRIGHT_SERVICE_RUN_ID ||
 const os = process.env.PLAYWRIGHT_SERVICE_OS || 'linux';
 
 export default defineConfig(config, {
-  workers: 40,
+  workers: 100,
   // Enable screenshot testing and configure directory with expectations.
   ignoreSnapshots: false,
   snapshotPathTemplate: `{testDir}/{testFilePath}-snapshots/${os}/{arg}{ext}`,  
