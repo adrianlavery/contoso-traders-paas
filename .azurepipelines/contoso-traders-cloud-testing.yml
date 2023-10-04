@@ -719,8 +719,6 @@ stages:
           APIURL: $[ dependencies.provision.outputs['getProductsApiEndpoint.productsApiEndpoint'] ]
           BASEURLFORPLAYWRIGHTTESTING: $[ dependencies.provision.outputs['getUiCdnEndpoint.uiCdnEndpoint'] ]
           B2CCLIENTID: $[ dependencies.provision.outputs['getAzureAdAppClientId.azureAdAppClientId'] ]
-          PLAYWRIGHT_SERVICE_URL: $(PLAYWRIGHT_SERVICE_URL)
-          PLAYWRIGHT_SERVICE_ACCESS_KEY: $(PLAYWRIGHT_SERVICE_ACCESS_KEY)
         steps:
           - task: NodeTool@0
             displayName: install nodejs
