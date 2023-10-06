@@ -82,6 +82,27 @@ export default defineConfig({
     {
       name: 'api',
       testMatch: 'tests/api/**/*.spec.ts',
-    }
+    },
+    {
+      name: 'Edge',
+      use: {
+        ...devices['Desktop Edge']
+      },
+      testIgnore: /api/,
+    },
+    {
+      name: 'Chrome HiDPI',
+      use: {
+        ...devices['Desktop Chrome HiDPI']
+      },
+      testIgnore: /api/,
+    },
+    {
+      name: 'Firefox HiDPI',
+      use: {
+        ...devices['Desktop Firefox HiDPI']
+      },
+      testIgnore: /api/,
+    }            
   ],
 });
