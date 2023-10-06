@@ -103,6 +103,48 @@ export default defineConfig({
         ...devices['Desktop Firefox HiDPI']
       },
       testIgnore: /api/,
-    }            
+    },
+    {
+      name: 'Firefox - Italy',
+      use: {
+        ...devices['Desktop Firefox'],
+      geolocation: {
+        latitude: 41.890221,
+        longitude: 12.492348
+      },
+      locale: 'it-IT',
+      permissions: ['geolocation'],
+      timezoneId: 'Europe/Rome'
+      },
+      testIgnore: /api/,
+    },
+    {
+      name: 'Firefox - Germany',
+      use: {
+        ...devices['Desktop Firefox'],
+      geolocation: {
+        latitude: 52.5200,
+        longitude: 13.4050
+      },
+      locale: 'de-de',
+      permissions: ['geolocation'],
+      timezoneId: 'Europe/Berlin'
+      },
+      testIgnore: /api/,
+    },    
+    {
+      name: 'Firefox - France',
+      use: {
+        ...devices['Desktop Firefox'],
+      geolocation: {
+        latitude: 48.8566,
+        longitude: 2.3522
+      },
+      locale: 'fr-fr',
+      permissions: ['geolocation'],
+      timezoneId: 'Europe/Paris'
+      },
+      testIgnore: /api/,
+      }                       
   ],
 });
