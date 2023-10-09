@@ -21,7 +21,7 @@ export default defineConfig(config, {
   expect: {
     timeout: 20000,
   },  
-  workers: 50,
+  workers: 40,
   // Enable screenshot testing and configure directory with expectations.
   ignoreSnapshots: false,
   snapshotPathTemplate: `{testDir}/{testFilePath}-snapshots/${os}/{arg}{ext}`,  
