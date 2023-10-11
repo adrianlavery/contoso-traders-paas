@@ -745,7 +745,7 @@ stages:
           - script: |
               echo "##vso[task.setvariable variable=CI;]1"
               PLAYWRIGHT_SERVICE_URL=$(PLAYWRIGHT_SERVICE_URL) PLAYWRIGHT_SERVICE_ACCESS_TOKEN=$(PLAYWRIGHT_SERVICE_ACCESS_TOKEN) npx playwright test --config=playwright.service.config.ts
-            displayName: run playwright tests
+            displayName: Run Playwright tests using Microsoft Playwright Testing
             workingDirectory: src/ContosoTraders.Ui.Website
             timeoutInMinutes: 20
           - task: PublishTestResults@2

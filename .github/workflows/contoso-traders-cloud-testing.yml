@@ -656,7 +656,7 @@ jobs:
           echo "REACT_APP_AADPASSWORD"="${{ env.AADPASSWORD }}" >> $GITHUB_ENV
       - name: install dependencies
         run: npm ci
-      - name: run playwright tests
+      - name: Run Playwright tests using Microsoft Playwright Testing
         id: test
         run: HOME=/root npx playwright test --config=playwright.service.config.ts
       - name: upload playwright report
