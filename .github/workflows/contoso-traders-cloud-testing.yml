@@ -632,7 +632,7 @@ jobs:
       AADUSERNAME: ${{ secrets.AADUSERNAME }}
       AADPASSWORD: ${{ secrets.AADPASSWORD }}
       PLAYWRIGHT_SERVICE_URL: ${{ secrets.PLAYWRIGHT_SERVICE_URL }}
-      PLAYWRIGHT_SERVICE_ACCESS_KEY: ${{ secrets.PLAYWRIGHT_SERVICE_ACCESS_KEY }}
+      PLAYWRIGHT_SERVICE_ACCESS_TOKEN: ${{ secrets.PLAYWRIGHT_SERVICE_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
@@ -646,7 +646,7 @@ jobs:
           echo "REACT_APP_APIURL"="https://${{ needs.provision.outputs.productsApiEndpoint }}/v1" >> $GITHUB_ENV
           echo "REACT_APP_BASEURLFORPLAYWRIGHTTESTING"="https://${{ needs.provision.outputs.uiCdnEndpoint }}" >> $GITHUB_ENV
           echo "PLAYWRIGHT_SERVICE_URL"="${{ env.PLAYWRIGHT_SERVICE_URL }}" >> $GITHUB_ENV
-          echo "PLAYWRIGHT_SERVICE_ACCESS_KEY"="${{ env.PLAYWRIGHT_SERVICE_ACCESS_KEY }}" >> $GITHUB_ENV
+          echo "PLAYWRIGHT_SERVICE_ACCESS_TOKEN"="${{ env.PLAYWRIGHT_SERVICE_ACCESS_TOKEN }}" >> $GITHUB_ENV
 
       - name: Set env variables for testing login
         if: ${{ env.AADUSERNAME != '' && env.AADPASSWORD != '' }}

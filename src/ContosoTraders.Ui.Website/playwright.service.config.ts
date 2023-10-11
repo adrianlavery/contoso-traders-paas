@@ -33,7 +33,7 @@ export default defineConfig(config, {
         runId: process.env.PLAYWRIGHT_SERVICE_RUN_ID,
       })}`,
       headers: {
-        "x-mpt-access-key": process.env.PLAYWRIGHT_SERVICE_ACCESS_KEY!,
+        "x-mpt-access-key": process.env.PLAYWRIGHT_SERVICE_ACCESS_TOKEN!,
       },
       // Allow service to access the localhost.
       exposeNetwork: "<loopback>",
