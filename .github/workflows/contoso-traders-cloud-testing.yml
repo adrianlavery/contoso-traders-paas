@@ -621,16 +621,18 @@ jobs:
 
   playwright-tests-ui:
     needs: [provision]
-    timeout-minutes: 20
+    timeout-minutes: 50
     runs-on: ubuntu-22.04
     container:
-      image: mcr.microsoft.com/playwright:v1.36.2-jammy
+      image: mcr.microsoft.com/playwright:v1.38.1-jammy
     defaults:
       run:
         working-directory: src/ContosoTraders.Ui.Website
     env:
       AADUSERNAME: ${{ secrets.AADUSERNAME }}
       AADPASSWORD: ${{ secrets.AADPASSWORD }}
+      PLAYWRIGHT_SERVICE_URL: ${{ secrets.PLAYWRIGHT_SERVICE_URL }}
+      PLAYWRIGHT_SERVICE_ACCESS_KEY: ${{ secrets.PLAYWRIGHT_SERVICE_ACCESS_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
@@ -638,11 +640,14 @@ jobs:
           node-version: 18
           cache: npm
           cache-dependency-path: src/ContosoTraders.Ui.Website/package-lock.json
-      - name: Set env variables for testing endpoints
+      - name: Set env variables for testing endpoints and Microsoft Playwright Testing
         run: |
           echo "REACT_APP_APIURLSHOPPINGCART"="https://${{ needs.provision.outputs.cartsApiEndpoint }}/v1" >> $GITHUB_ENV
           echo "REACT_APP_APIURL"="https://${{ needs.provision.outputs.productsApiEndpoint }}/v1" >> $GITHUB_ENV
           echo "REACT_APP_BASEURLFORPLAYWRIGHTTESTING"="https://${{ needs.provision.outputs.uiCdnEndpoint }}" >> $GITHUB_ENV
+          echo "PLAYWRIGHT_SERVICE_URL"="${{ env.PLAYWRIGHT_SERVICE_URL }}" >> $GITHUB_ENV
+          echo "PLAYWRIGHT_SERVICE_ACCESS_KEY"="${{ env.PLAYWRIGHT_SERVICE_ACCESS_KEY }}" >> $GITHUB_ENV
+
       - name: Set env variables for testing login
         if: ${{ env.AADUSERNAME != '' && env.AADPASSWORD != '' }}
         run: |
@@ -653,7 +658,7 @@ jobs:
         run: npm ci
       - name: run playwright tests
         id: test
-        run: HOME=/root npx playwright test
+        run: HOME=/root npx playwright test --config=playwright.service.config.ts
       - name: upload playwright report
         uses: actions/upload-artifact@v3
         # only upload report if tests failed

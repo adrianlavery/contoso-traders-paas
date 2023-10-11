@@ -713,7 +713,7 @@ stages:
 
       - job: playwright_tests_ui
         dependsOn: [provision]
-        container: mcr.microsoft.com/playwright:v1.36.2-jammy
+        container: mcr.microsoft.com/playwright:v1.38.1-jammy
         variables:
           APIURLSHOPPINGCART: $[ dependencies.provision.outputs['getCartsApiEndpoint.cartsApiEndpoint'] ]
           APIURL: $[ dependencies.provision.outputs['getProductsApiEndpoint.productsApiEndpoint'] ]
@@ -744,7 +744,7 @@ stages:
             workingDirectory: src/ContosoTraders.Ui.Website
           - script: |
               echo "##vso[task.setvariable variable=CI;]1"
-              npx playwright test
+              PLAYWRIGHT_SERVICE_URL=$(PLAYWRIGHT_SERVICE_URL) PLAYWRIGHT_SERVICE_ACCESS_KEY=$(PLAYWRIGHT_SERVICE_ACCESS_KEY) npx playwright test --config=playwright.service.config.ts
             displayName: run playwright tests
             workingDirectory: src/ContosoTraders.Ui.Website
             timeoutInMinutes: 20
@@ -762,6 +762,6 @@ stages:
             displayName: upload playwright report
             condition: failed()
             inputs:
-              PathtoPublish: 'src/ContosoTraders.Ui.Website/playwright-report'
-              ArtifactName: 'playwright-report'
-              publishLocation: 'Container'              
+              PathtoPublish: "src/ContosoTraders.Ui.Website/playwright-report"
+              ArtifactName: "playwright-report"
+              publishLocation: "Container"

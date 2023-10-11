@@ -29,7 +29,8 @@ export default defineConfig({
     ["junit", { outputFile: "playwright-report-junit/e2e-junit-results.xml" }],
     ...(process.env.CI ? [['github'] as ['github']] : []),
   ],
-
+  // Ignore screenshots locally and only run using MPT service via playwright.service.config.ts
+  ignoreSnapshots: true,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* https://github.com/microsoft/playwright/issues/14440 - TODO - Investigate later */
@@ -81,6 +82,69 @@ export default defineConfig({
     {
       name: 'api',
       testMatch: 'tests/api/**/*.spec.ts',
-    }
+    },
+    {
+      name: 'Edge',
+      use: {
+        ...devices['Desktop Edge']
+      },
+      testIgnore: /api/,
+    },
+    {
+      name: 'Chrome HiDPI',
+      use: {
+        ...devices['Desktop Chrome HiDPI']
+      },
+      testIgnore: /api/,
+    },
+    {
+      name: 'Firefox HiDPI',
+      use: {
+        ...devices['Desktop Firefox HiDPI']
+      },
+      testIgnore: /api/,
+    },
+    {
+      name: 'Firefox - Italy',
+      use: {
+        ...devices['Desktop Firefox'],
+      geolocation: {
+        latitude: 41.890221,
+        longitude: 12.492348
+      },
+      locale: 'it-IT',
+      permissions: ['geolocation'],
+      timezoneId: 'Europe/Rome'
+      },
+      testIgnore: /api/,
+    },
+    {
+      name: 'Firefox - Germany',
+      use: {
+        ...devices['Desktop Firefox'],
+      geolocation: {
+        latitude: 52.5200,
+        longitude: 13.4050
+      },
+      locale: 'de-de',
+      permissions: ['geolocation'],
+      timezoneId: 'Europe/Berlin'
+      },
+      testIgnore: /api/,
+    },    
+    {
+      name: 'Firefox - France',
+      use: {
+        ...devices['Desktop Firefox'],
+      geolocation: {
+        latitude: 48.8566,
+        longitude: 2.3522
+      },
+      locale: 'fr-fr',
+      permissions: ['geolocation'],
+      timezoneId: 'Europe/Paris'
+      },
+      testIgnore: /api/,
+      }                       
   ],
 });
